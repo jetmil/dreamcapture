@@ -5,6 +5,7 @@ import { Moment } from '@/lib/api';
 import { formatDistanceToNow, safeParseDate } from '@/lib/date-utils';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import MomentDetailModal from './MomentDetailModal';
 
 interface MomentCardProps {
   moment: Moment;
@@ -12,6 +13,7 @@ interface MomentCardProps {
 
 export default function MomentCard({ moment }: MomentCardProps) {
   const [secondsLeft, setSecondsLeft] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const updateTimer = () => {
@@ -33,13 +35,15 @@ export default function MomentCard({ moment }: MomentCardProps) {
   }, [moment.expires_at]);
 
   return (
-    <motion.div
-      className="glass rounded-2xl overflow-hidden moment-glow hover:scale-105 transition-transform cursor-pointer"
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.8 }}
-      whileHover={{ y: -5 }}
-    >
+    <>
+      <motion.div
+        className="glass rounded-2xl overflow-hidden moment-glow hover:scale-105 transition-transform cursor-pointer"
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.8 }}
+        whileHover={{ y: -5 }}
+        onClick={() => setIsModalOpen(true)}
+      >
       {/* Media */}
       <div className="relative w-full h-64">
         {moment.media_type === 'photo' ? (
@@ -105,6 +109,15 @@ export default function MomentCard({ moment }: MomentCardProps) {
           <span>{formatDistanceToNow(moment.created_at)}</span>
         </div>
       </div>
-    </motion.div>
+      </motion.div>
+
+      {/* Modal */}
+      {isModalOpen && (
+        <MomentDetailModal
+          moment={moment}
+          onClose={() => setIsModalOpen(false)}
+        />
+      )}
+    </>
   );
 }
