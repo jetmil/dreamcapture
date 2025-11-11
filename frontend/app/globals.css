@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+  }
+
+  body {
+    @apply bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950;
+    @apply text-white;
+    @apply min-h-screen;
+    font-family: var(--font-geist-sans), system-ui, sans-serif;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10;
+  }
+
+  .dream-glow {
+    box-shadow: 0 0 40px rgba(99, 102, 241, 0.3);
+  }
+
+  .moment-glow {
+    box-shadow: 0 0 40px rgba(239, 68, 68, 0.3);
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-dream-400 via-purple-400 to-moment-400;
+    @apply bg-clip-text text-transparent;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Animations */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.shimmer {
+  animation: shimmer 2s infinite linear;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 100%
+  );
+  background-size: 1000px 100%;
+}
