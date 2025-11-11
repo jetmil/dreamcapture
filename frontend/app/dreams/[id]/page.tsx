@@ -101,7 +101,7 @@ export default function DreamDetailPage() {
                 src={dream.generated_image_url}
                 alt={dream.title || 'Dream visualization'}
                 fill
-                className="object-cover"
+                className="object-cover object-top"
                 priority
               />
             </div>

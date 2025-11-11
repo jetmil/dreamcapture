@@ -47,12 +47,12 @@ export default function MomentCard({ moment }: MomentCardProps) {
             src={moment.media_url}
             alt={moment.caption || 'Moment'}
             fill
-            className="object-cover"
+            className="object-cover object-top"
           />
         ) : (
           <video
             src={moment.media_url}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-top"
             autoPlay
             loop
             muted
